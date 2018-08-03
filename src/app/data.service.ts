@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {
+  Observable
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +13,11 @@ export class DataService {
 
    }
 
-   getRecepti () {
-     const body = {
-       'sestavine' : [
-         'Piscanec',
-         'Krompir'
-       ]
-     };
-     return this.http.post('http://localhost/api/recepti', body );
+  postEndpoint(  postParams: any ): Observable<any> {
+            return this.http.post( 'http://localhost/api/recepti', postParams );
+    }
+
+   getRandomRecept() {
+     return this.http.get('http://localhost/api/randomRecept' );
    }
 }

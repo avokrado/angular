@@ -1,0 +1,66 @@
+<div class="grid-container" style="text-align: center;">
+  <h1 class="mat-h1">Kaj kuhati?</h1>
+  
+  
+  <div class="row" *ngIf="uporabnikoveSestavine.length>=0" style="margin-bottom: 10px;">
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle >{{izbranaPrvaSestavina}}</button>
+      <ul ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+        <li *ngFor="let sestavina of sestavine" (click)="uporabnikoveSestavine[0]= sestavina; odstraniSestavino(sestavina); izbranaPrvaSestavina=sestavina; izbranaDrugaSestavina=sestavine[0]" >
+          <a class="pointer"> {{sestavina}}</a>
+        </li>
+     </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="uporabnikoveSestavine.length>=1" style="margin-bottom: 10px;">
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{izbranaDrugaSestavina}}</button>
+      <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <li *ngFor="let sestavina of sestavine" (click)="uporabnikoveSestavine[1]= sestavina; odstraniSestavino(sestavina); izbranaDrugaSestavina=sestavina; izbranaTretjaSestavina=sestavine[1]">
+          <a class="pointer">{{sestavina}}</a>
+        </li>
+     </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="uporabnikoveSestavine.length>=2" style="margin-bottom: 10px;">
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{izbranaTretjaSestavina}}</button>
+      <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <li *ngFor="let sestavina of sestavine" (click)="uporabnikoveSestavine[2]= sestavina; odstraniSestavino(sestavina); izbranaTretjaSestavina=sestavina">
+          <a class="pointer"> {{sestavina}}</a>
+        </li>
+     </ul>
+    </div>
+  </div>
+</div>
+ <button type="button" class="btn btn-success" (click)="poisci()">Poišči recepte</button>
+
+  <mat-grid-list cols="1" rowHeight="350px">
+    <mat-grid-tile *ngFor="let recept of recepti">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{recept.naziv}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Remove</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>{{recept.postopek}}</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

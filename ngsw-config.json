@@ -9,7 +9,8 @@
         "/index.html",
         "/*.css",
         "/*.js"
-      ]
+      ],
+      "urls": ["https://fonts.googleapi.com/**"]
     }
   }, {
     "name": "assets",
@@ -20,5 +21,17 @@
         "/assets/**"
       ]
     }
-  }]
+  }],
+   "dataGroups" : [
+    {
+      "name": "recepti-api",
+      "urls": ["https://localhost/api/randomRecept"],
+      "cacheConfig" : {
+        "strategy": "freshness",
+        "maxSize": 20,
+        "maxAge": "1h",
+        "timeout": "5s"
+      }
+    }
+  ]
 }
